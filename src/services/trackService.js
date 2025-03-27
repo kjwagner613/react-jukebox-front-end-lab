@@ -26,6 +26,22 @@ const create = async (formData) => {
   }
 };
 
+const show = async (trackId) => { 
+  try {
+    const res = await fetch(`${BASE_URL}/${trackId}`, { 
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    return res.json(); 
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
 const update = async (formData, trackId) => {
   try {
     const res = await fetch(`${BASE_URL}/${trackId}`, {
@@ -44,11 +60,9 @@ const update = async (formData, trackId) => {
 
 const deleteTrack = async (trackId) => {
   try {
-    const res = await fetch(`${BASE_URL}/${trackId}`, {
+    await fetch(`${BASE_URL}/${trackId}`, {
       method: 'DELETE',
     });
-
-    return res.json();
   } catch (err) {
     console.log(err);
   }
@@ -56,6 +70,7 @@ const deleteTrack = async (trackId) => {
 
 export { 
   index,
+  show,
   create,
   update,
   deleteTrack,

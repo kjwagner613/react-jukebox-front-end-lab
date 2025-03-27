@@ -93,15 +93,11 @@ function App() {
 
   const handleDeleteTrack = async (trackId) => {
     try {
-      const deletedTrack = await trackService.deleteTrack(trackId);
+      await trackService.deleteTrack(trackId);
 
-      if (deletedTrack.err) {
-        throw new Error(deletedTrack.err);
-      }
-
-      setTracks((prevTracks) => (
+      setTracks((prevTracks) =>
         prevTracks.filter((track) => track._id !== trackId)
-      ));
+      );
 
       if (currentlyPlaying && currentlyPlaying._id === trackId) {
         setCurrentlyPlaying(null);
